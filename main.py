@@ -24,6 +24,9 @@ def cadastrar_livro():
     print("Livro cadastrado com sucesso!")
     return True
 
+#Esta funçao lista os livros cadastrados no arquivo CSV, exibindo suas informações de forma organizada.
+# Esta função lista os livros cadastrados no arquivo CSV
+
 def listar_livros():
     if not os.path.exists('livros.csv'):
         print("Nenhum livro cadastrado.")
@@ -44,10 +47,10 @@ def listar_livros():
             
             print(
                 f"{i}. Título: {linha_limpa.get('Titulo', 'N/A')} | "
-                f"Autor: {linha_limpa.get('Autor', 'Autor')} | "
-                f"Ano: {linha_limpa.get('Ano', 'Ano')} | "
-                f"Código: {linha_limpa.get('Codigo/ISBN', 'Código')} | "
-                f"Status: {linha_limpa.get('Status', 'Status')}"
+                f"Autor: {linha_limpa.get('Autor', 'N/A')} | "
+                f"Ano: {linha_limpa.get('Ano', 'N/A')} | "
+                f"Código: {linha_limpa.get('Codigo/ISBN', 'N/A')} | "
+                f"Status: {linha_limpa.get('Status', 'N/A')}"
             )
         print("-" * 25)
 
@@ -62,6 +65,9 @@ def pesquisar_livro():
         leitor_csv = csv.DictReader(arquivo)
         livros_encontrados = []
 
+# A função pesquisa livros no arquivo CSV com base no título ou autor fornecido pelo usuário.
+# Ela percorre cada linha do arquivo, verificando se o termo de pesquisa está presente no título ou autor do livro. Se encontrar correspondências, adiciona os livros encontrados a uma lista e exibe os resultados de forma organizada. Caso nenhum livro seja encontrado, informa ao usuário que não há resultados correspondentes.
+       
         for linha in leitor_csv:
             titulo = linha.get('Titulo', '').lower()
             autor = linha.get('Autor', '').lower()
@@ -73,15 +79,18 @@ def pesquisar_livro():
             print("\n--- RESULTADOS DA PESQUISA ---")
             for i, livro in enumerate(livros_encontrados, start=1):
                 print(
-                    f"{i}. Título: {livro.get('Titulo', 'N/A')} | "
-                    f"Autor: {livro.get('Autor', 'Autor')} | "
-                    f"Ano: {livro.get('Ano', 'Ano')} | "
-                    f"Código: {livro.get('Codigo/ISBN', 'Código')} | "
-                    f"Status: {livro.get('Status', 'Status')}"
+                    f"{i}. Título: {livro.get('Titulo')} | "
+                    f"Autor: {livro.get('Autor')} | "
+                    f"Ano: {livro.get('Ano')} | "
+                    f"Código: {livro.get('Codigo/ISBN')} | "
+                    f"Status: {livro.get('Status')}"
                 )
             print("-" * 25)
         else:
             print("Nenhum livro encontrado com o termo pesquisado.")
+
+# A função registrar_emprestimo() permite que o usuário registre o empréstimo de um livro. 
+# Ela verifica se o arquivo 'livros.csv' existe e, em seguida, lista os livros disponíveis. O usuário é solicitado a digitar o código do livro que deseja emprestar. A função percorre os livros cadastrados, verificando se o código corresponde a algum livro. Se o livro estiver disponível, seu status é alterado para "Emprestado" e uma mensagem de sucesso é exibida. Caso contrário, uma mensagem informando que o livro não está disponível é mostrada. Se o código não for encontrado, uma mensagem de erro é exibida. Por fim, as alterações são salvas no arquivo CSV.
 
 def registrar_emprestimo():
     if not os.path.exists('livros.csv'):
@@ -114,6 +123,10 @@ def registrar_emprestimo():
         escritor_csv.writeheader()
         escritor_csv.writerows(livros)   
 
+# A função registrar_devolucao() permite que o usuário registre a devolução de um livro.
+# Ela verifica se o arquivo 'livros.csv' existe e, em seguida, lista os livros cadastrados.
+# O usuário é solicitado a digitar o código do livro que deseja devolver. A função percorre os livros cadastrados, verificando se o código corresponde a algum livro. Se o livro estiver emprestado, seu status é alterado para "Disponível" e uma mensagem de sucesso é exibida. Caso contrário, uma mensagem informando que o livro não está emprestado é mostrada. Se o código não for encontrado, uma mensagem de erro é exibida. Por fim, as alterações são salvas no arquivo CSV.
+
 def registrar_devolucao():
     if not os.path.exists('livros.csv'):
         print("Nenhum livro cadastrado.")
@@ -145,6 +158,8 @@ def registrar_devolucao():
         escritor_csv.writeheader()
         escritor_csv.writerows(livros)       
 
+# A função ordenar_livros() ordena os livros cadastrados no arquivo CSV por título em ordem alfabética.
+
 def ordenar_livros():
     if not os.path.exists('livros.csv'):
         print("Nenhum livro cadastrado.")
@@ -171,43 +186,41 @@ def ordenar_livros():
         )
     print("-" * 25)                  
 
-def main():
-    while True:
+while True:
 
-        print("\n====== Biblioteca ======")
-        print("1 - Cadastrar livro")
-        print("2 - Listar livros")
-        print("3 - Pesquisar livro")
-        print("4 - Registrar empréstimo")
-        print("5 - Registrar devolução")
-        print("6 - Ordenar livros")
-        print("7 - Sair")
+    print("\n====== Biblioteca ======")
+    print("1 - Cadastrar livro")
+    print("2 - Listar livros")
+    print("3 - Pesquisar livro")
+    print("4 - Registrar empréstimo")
+    print("5 - Registrar devolução")
+    print("6 - Ordenar livros")
+    print("7 - Sair")
 
-        opcao = int(input("Digite a opção desejada: "))
+    opcao = int(input("Digite a opção desejada: "))
 
-        if opcao == 1:
+    if opcao == 1:
             cadastrar_livro()
         
-        elif opcao == 2:
+    elif opcao == 2:
             listar_livros()
 
-        elif opcao == 3:
+    elif opcao == 3:
             pesquisar_livro()
 
-        elif opcao == 4:
+    elif opcao == 4:
             registrar_emprestimo()
 
-        elif opcao == 5:
+    elif opcao == 5:
             registrar_devolucao()
 
-        elif opcao == 6:
+    elif opcao == 6:
             ordenar_livros()
 
-        elif opcao == 7:
+    elif opcao == 7:
             print("Programa encerrado.")
             break
 
-        else:
+    else:
             print("Opção não encontrada.")
 
-main()

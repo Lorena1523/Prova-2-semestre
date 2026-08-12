@@ -1,6 +1,3 @@
-Titulo,autor,ano,Codigo/ISBN,Status,Disponivel
-Lorena,Lorena,2008,0208,Disponível
-Lucas,Lucas,2009,1234,Disponível
+Titulo,Autor,Ano,Codigo/ISBN,Status
 Meu pequeno aranha,Lorena Trindade,2009,020809,Disponível
-Meu pequeno aranha,Lorena Trindade,2009,020809,Disponível
-Teste,teste,1234,123456,Disponível
+Cates ,Graciliano Ramos,2013,134340,Disponível
